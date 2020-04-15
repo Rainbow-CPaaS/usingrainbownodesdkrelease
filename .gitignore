@@ -74,3 +74,7 @@ fabric.properties
 
 node_modules
 /dist/
+/tests/index.d.ts
+/tests/index.js
+/tests/index.js.map
+/.idea/*

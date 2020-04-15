@@ -1,12 +1,31 @@
 {
   "compilerOptions": {
-    "module": "umd",
+    "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "removeComments": false,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true // ,
+    // "esModuleInterop": true
+  } ,
+  "buildOnSave": true,
+  "compileOnSave": true,
+  "formatCodeOptions": {
+    "indentSize": 4,
+    "tabSize": 4,
+    "newLineCharacter": "\r\n",
+    "convertTabsToSpaces": true,
+    "insertSpaceAfterCommaDelimiter": true,
+    "insertSpaceAfterSemicolonInForStatements": true,
+    "insertSpaceBeforeAndAfterBinaryOperators": true,
+    "insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": false,
+    "placeOpenBraceOnNewLineForControlBlocks": false
   },
   "exclude": [
     "src",

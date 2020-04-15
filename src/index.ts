@@ -81,7 +81,6 @@ export module RainbowBodeSDKTest {
         let options = {
             "rainbow": {
                 "host": "sandbox",                      // Can be "sandbox" (developer platform), "official" or any other hostname when using dedicated AIO
-                //      "host": "openrainbow.net",
                 // "mode": "s2s"
                 "mode": "xmpp"
             },
@@ -124,7 +123,7 @@ export module RainbowBodeSDKTest {
                 },
                 "file": {
                     "path": "c:/temp/",
-                    "customFileName": "R-SDK-Node-Sample",
+                    "customFileName": "R-SDK-Node-TS-Sample",
                     //"level": 'info',                    // Default log level used
                     "zippedArchive": false /*,
             "maxSize" : '10m',
@@ -139,7 +138,6 @@ export module RainbowBodeSDKTest {
                 "sendMessageToConnectedUser": true,
                 "conversationsRetrievedFormat": "small",
                 "storeMessages": false,
-                "copyMessage": true,
                 "nbMaxConversations": 15,
                 "rateLimitPerHour": 1000,
                 "messagesDataStore": DataStoreType.StoreTwinSide // */
@@ -199,12 +197,12 @@ export module RainbowBodeSDKTest {
         });
 
 
-        options.logs.customLabel = options.credentials.login;
-
-
+        // To add the name of the connected user in logs. Useful for debug when using multiple instance of the SDK in same program to connect several bots.
+        // Of course it is not a good idea on production system to do it because it does not complain the RGPD.
         options.logs.customLabel = options.credentials.login;
 
         rainbowSDK = new NodeSDK(options);
+        // To use the same logger than the SDK. It is not recommended for real programs.
         logger = rainbowSDK._core.logger;
 
         handleEvents();

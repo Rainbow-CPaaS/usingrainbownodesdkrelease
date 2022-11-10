@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.21",
-    "mocha": "^8.2.1",
+    "mocha": "^10.1.0",
     "mocka": "0.0.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"

@@ -12,15 +12,19 @@
 import "rainbow-node-sdk";
 // import "webrtc";
 // import {NodeSDK} from "";
-import {NodeSDK} from "rainbow-node-sdk/lib/NodeSDK";
+//import {NodeSDK} from "rainbow-node-sdk/lib/NodeSDK";
+import {NodeSDK, LogLevelAreas} from "rainbow-node-sdk";
 
 import {DataStoreType} from "rainbow-node-sdk/lib/config/config";
 import {Logger} from "rainbow-node-sdk/lib/common/Logger";
 import {main} from "ts-node/dist/bin";
 import * as util from "util";
+import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble";
+import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils";
+import {LEVELSNAMES} from "../../rainbow-node-sdk-sample2/lib/common/LevelLogs";
 const inquirer = require("inquirer");
 
-let rainbowSDK : NodeSDK;
+let rainbowSDK : NodeSDK; //RainbowSdk;
 let logger : Logger;
 export module RainbowBodeSDKTest {
     function handleEvents() {
@@ -37,6 +41,25 @@ export module RainbowBodeSDKTest {
         rainbowSDK.events.on("rainbow_onstopped", (data: any) => {
             logger.log("debug", "MAIN - rainbow_onstopped - rainbow event received. data : ", data);
 
+        });
+
+        let bubbleInvitationReceived = null;
+        rainbowSDK.events.on("rainbow_onbubbleinvitationreceived", async (bubble: Bubble) => {
+            logger.log("debug", "MAIN - (rainbow_onbubbleinvitationreceived) - rainbow event received.", bubble);
+            bubbleInvitationReceived = bubble;
+
+            logger.log("debug", "MAIN - [testCreateBubbles    ] :: before setTimeoutPromised.");
+            //setTimeoutPromised(6000).then(async () => {
+                logger.log("debug", "MAIN - [testCreateBubbles    ] :: after setTimeoutPromised.");
+                let utc = new Date().toJSON().replace(/-/g, "/");
+                logger.log("debug", "MAIN - [testCreateBubbles    ] :: createBubble request ok", bubble);
+                let message = "message de test : " + utc;
+                await rainbowSDK.im.sendMessageToBubbleJid(message, bubble.jid, "en", undefined, "subject", undefined, "middle");
+                /* await rainbowSDK.im.sendMessageToBubbleJid(message, bubble.jid, "en", {
+                    "type": "text/markdown",
+                    "message": message
+                }, "subject", undefined, "middle"); // */
+            //});
         });
     }
 
@@ -77,7 +100,7 @@ export module RainbowBodeSDKTest {
 
         const ngrok = require('ngrok');
         let urlS2S;
-
+        let logLevelAreas = new LogLevelAreas(LEVELSNAMES.ERROR, true, false, false);
         let options = {
             "rainbow": {
                 "host": "sandbox",                      // Can be "sandbox" (developer platform), "official" or any other hostname when using dedicated AIO
@@ -113,9 +136,10 @@ export module RainbowBodeSDKTest {
             // Logs options
             "logs": {
                 "enableConsoleLogs": true,
-                "enableFileLogs": true,
+                "enableFileLogs": false,
                 "color": true,
                 "level": "debug",
+                "areas": logLevelAreas,
                 "customLabel": "RainbowSample",
                 "system-dev": {
                     "internals": true,
@@ -203,7 +227,7 @@ export module RainbowBodeSDKTest {
 
         rainbowSDK = new NodeSDK(options);
         // To use the same logger than the SDK. It is not recommended for real programs.
-        logger = rainbowSDK._core.logger;
+        logger = rainbowSDK._core._logger;
 
         handleEvents();
 

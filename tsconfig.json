@@ -1,16 +1,47 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es5",
+    //  "ignoreDeprecations": "5.0",
+    "noImplicitAny": false,
+    //"module": "bundler",
+    //"module": "ES2020",
+    "module": "esnext",
+    //"moduleResolution": "node",
+    //"module": "node16",
+    "moduleResolution": "node16",
+    "target": "esnext",
     "sourceMap": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "removeComments": false,
-    "moduleResolution": "Node",
     "declaration": true,
-    "allowSyntheticDefaultImports": true // ,
-    // "esModuleInterop": true
-  } ,
+    "allowJs": false,
+    "allowUnusedLabels": true,
+    //    "charset": "utf-8",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    //"noFallthroughCasesInSwitch": false,
+    //"noImplicitReturns": true,
+    "pretty": true,
+    //"removeComments": true,
+    "rootDir": "./src",
+    "project": "./src",
+    //"stripInternal": true,
+    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "lib": [
+      "es6",
+      "es2020"
+    ],
+    //, "dom"
+    //"moduleResolution": "node",
+    //"moduleResolution": "classic",
+    //"checkJs": true,
+    "explainFiles": true,
+    "diagnostics": true,
+    "traceResolution": true,
+ //   "moduleResolution": "nodeNext",
+    "types": []
+  },
   "buildOnSave": true,
   "compileOnSave": true,
   "formatCodeOptions": {
@@ -28,9 +59,11 @@
     "placeOpenBraceOnNewLineForControlBlocks": false
   },
   "exclude": [
-    "src",
-    "node_modules",
-    "bower_component",
-    "dist"
+    "./node_modules/*",
+    "./bower_component",
+    "./dist"
+  ],
+  "include": [
+    "./src/**/*.ts",
   ]
 }

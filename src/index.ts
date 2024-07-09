@@ -13,6 +13,7 @@ import "rainbow-node-sdk";
 // import "webrtc";
 // import {NodeSDK} from "";
 //import {NodeSDK} from "rainbow-node-sdk/lib/NodeSDK";
+
 import {NodeSDK, LogLevelAreas} from "rainbow-node-sdk";
 
 import {DataStoreType} from "rainbow-node-sdk/lib/config/config";
@@ -22,7 +23,7 @@ import * as util from "util";
 import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble";
 import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils";
 import {LEVELSNAMES} from "../../rainbow-node-sdk-sample2/lib/common/LevelLogs";
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
 
 let rainbowSDK : NodeSDK; //RainbowSdk;
 let logger : Logger;
@@ -75,7 +76,9 @@ export module RainbowBodeSDKTest {
             "   * console.log(rainbowSDK.ServiceName.APIMethod()) // to log on console the result of a call to rainbow node sdk api method.\n" +
             "   * example : console.log(rainbowSDK.contacts.getAll()) // to get all the logged in user's contacts.\n" +
             "   * by // to quit the program."); //logger.colors.green(JSON.stringify(result)));
-        inquirer.prompt(questions).then((answers : any) => {
+        let prompt = inquirer.createPromptModule();
+        // @ts-ignore
+        prompt(questions).then((answers : any) => {
             //console.log(`Hi ${answers.cmd}!`);
             logger.log("debug", "MAIN - cmd entered : ", answers.cmd); //logger.colors.green(JSON.stringify(result)));
             try {

@@ -16,13 +16,13 @@ import "rainbow-node-sdk";
 
 import {NodeSDK, LogLevelAreas} from "rainbow-node-sdk";
 
-import {DataStoreType} from "rainbow-node-sdk/lib/config/config";
-import {Logger} from "rainbow-node-sdk/lib/common/Logger";
+import {DataStoreType} from "rainbow-node-sdk/lib/config/config.js";
+import {Logger} from "rainbow-node-sdk/lib/common/Logger.js";
 import {main} from "ts-node/dist/bin";
 import * as util from "util";
-import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble";
-import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils";
-import {LEVELSNAMES} from "../../rainbow-node-sdk-sample2/lib/common/LevelLogs";
+import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble.js";
+import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
+import {LEVELSNAMES} from "../../rainbow-node-sdk-sample2/lib/common/LevelLogs.js";
 import inquirer from "inquirer";
 
 let rainbowSDK : NodeSDK; //RainbowSdk;
@@ -101,9 +101,117 @@ export module RainbowBodeSDKTest {
     export function Main() {
         console.log("MAIN - Start");
 
-        const ngrok = require('ngrok');
+        // const ngrok = require('ngrok');
         let urlS2S;
         let logLevelAreas = new LogLevelAreas(LEVELSNAMES.ERROR, true, false, false);
+
+        logLevelAreas.admin.api = true;
+        logLevelAreas.admin.level = LEVELSNAMES.ERROR;
+        logLevelAreas.alerts.api = true;
+        logLevelAreas.alerts.level = LEVELSNAMES.ERROR;
+        logLevelAreas.bubbles.api = true;
+        logLevelAreas.bubbles.level = LEVELSNAMES.ERROR;
+        logLevelAreas.calllog.api = true;
+        logLevelAreas.calllog.level = LEVELSNAMES.ERROR;
+        logLevelAreas.channels.api = true;
+        logLevelAreas.channels.level = LEVELSNAMES.ERROR;
+        logLevelAreas.connectedUser.api = true;
+        logLevelAreas.connectedUser.level = LEVELSNAMES.ERROR;
+        logLevelAreas.contacts.api = true;
+        logLevelAreas.contacts.level = LEVELSNAMES.ERROR;
+        logLevelAreas.conversations.api = true;
+        logLevelAreas.conversations.level = LEVELSNAMES.ERROR;
+        logLevelAreas.events.api = true;
+        logLevelAreas.events.level = LEVELSNAMES.ERROR;
+        logLevelAreas.favorites.api = true;
+        logLevelAreas.favorites.level = LEVELSNAMES.ERROR;
+        logLevelAreas.fileServer.api = true;
+        logLevelAreas.fileServer.level = LEVELSNAMES.ERROR;
+        logLevelAreas.fileStorage.api = true;
+        logLevelAreas.fileStorage.level = LEVELSNAMES.ERROR;
+        logLevelAreas.groups.api = true;
+        logLevelAreas.groups.level = LEVELSNAMES.ERROR;
+        logLevelAreas.httpoverxmpp.api = true;
+        logLevelAreas.httpoverxmpp.level = LEVELSNAMES.ERROR;
+        logLevelAreas.ims.api = true;
+        logLevelAreas.ims.level = LEVELSNAMES.ERROR;
+        logLevelAreas.invitations.api = true;
+        logLevelAreas.invitations.level = LEVELSNAMES.ERROR;
+        logLevelAreas.presence.api = true;
+        logLevelAreas.presence.level = LEVELSNAMES.ERROR;
+        logLevelAreas.profiles.api = true;
+        logLevelAreas.profiles.level = LEVELSNAMES.ERROR;
+        logLevelAreas.rbvoice.api = true;
+        logLevelAreas.rbvoice.level = LEVELSNAMES.ERROR;
+        logLevelAreas.rpcoverxmpp.api = true;
+        logLevelAreas.rpcoverxmpp.level = LEVELSNAMES.ERROR;
+        logLevelAreas.s2s.api = true;
+        logLevelAreas.s2s.level = LEVELSNAMES.ERROR;
+        logLevelAreas.settings.api = true;
+        logLevelAreas.settings.level = LEVELSNAMES.ERROR;
+        logLevelAreas.tasks.api = true;
+        logLevelAreas.tasks.level = LEVELSNAMES.ERROR;
+        logLevelAreas.telephony.api = true;
+        logLevelAreas.telephony.level = LEVELSNAMES.ERROR;
+        logLevelAreas.version.api = true;
+        logLevelAreas.version.level = LEVELSNAMES.ERROR;
+        logLevelAreas.webinars.api = true;
+        logLevelAreas.webinars.level = LEVELSNAMES.ERROR;
+        logLevelAreas.core.level = LEVELSNAMES.ERROR;
+        logLevelAreas.bubblemanager.level = LEVELSNAMES.ERROR;
+        logLevelAreas.httpmanager.level = LEVELSNAMES.ERROR;
+        logLevelAreas.httpservice.level = LEVELSNAMES.ERROR;
+        logLevelAreas.rest.level = LEVELSNAMES.ERROR;
+        logLevelAreas.resttelephony.level = LEVELSNAMES.ERROR;
+        logLevelAreas.restconferencev2.level = LEVELSNAMES.ERROR;
+        logLevelAreas.restwebinar.level = LEVELSNAMES.ERROR;
+        logLevelAreas.xmpp.level = LEVELSNAMES.ERROR;
+        logLevelAreas.xmpp.xmppin
+        logLevelAreas.xmpp.xmppout
+        logLevelAreas.s2sevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.rbvoiceevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.alertevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.calllogevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.channelevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.conversationevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.conversationhistory.level = LEVELSNAMES.ERROR;
+        logLevelAreas.favoriteevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.httpoverxmppevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.invitationevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.iqevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.presenceevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.rpcoverxmppevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.tasksevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.telephonyevent.level = LEVELSNAMES.ERROR;
+        logLevelAreas.webinarevent.level = LEVELSNAMES.ERROR;
+
+        logLevelAreas.showRESTLogs(LEVELSNAMES.INTERNAL);
+        logLevelAreas.showEventsLogs();
+        // logLevelAreas.showServicesLogs();
+        logLevelAreas.hideServicesApiLogs();
+        /*
+            logLevelAreas.tasks.api = true;
+            logLevelAreas.tasks.level = LEVELSNAMES.INTERNAL;
+            logLevelAreas.tasksevent.level = LEVELSNAMES.INTERNAL;
+        */
+
+        logLevelAreas.conversations.api = true;
+        logLevelAreas.conversations.level = LEVELSNAMES.INTERNAL;
+        logLevelAreas.conversationevent.level = LEVELSNAMES.INTERNAL;
+        logLevelAreas.conversationhistory.level = LEVELSNAMES.INTERNAL;
+        // */
+
+        //logLevelAreas.bubblemanager.level = LEVELSNAMES.INTERNAL;
+
+        logLevelAreas.fileServer.api = true;
+        logLevelAreas.fileServer.level = LEVELSNAMES.INTERNAL;
+        logLevelAreas.fileStorage.api = true;
+        logLevelAreas.fileStorage.level = LEVELSNAMES.INTERNAL;
+
+        logLevelAreas.xmpp.level = LEVELSNAMES.INTERNAL;
+        logLevelAreas.xmpp.xmppin
+        logLevelAreas.xmpp.xmppout
+
         let options = {
             "rainbow": {
                 "host": "sandbox",                      // Can be "sandbox" (developer platform), "official" or any other hostname when using dedicated AIO
@@ -114,11 +222,65 @@ export module RainbowBodeSDKTest {
                 "login": "",  // The Rainbow email account to use
                 "password": "",
             },
+            "xmpp": {
+                "host": "",
+                "port": "443",
+                "protocol": "wss",
+                "timeBetweenXmppRequests": "0",
+                "raiseLowLevelXmppInEvent": false,
+                "raiseLowLevelXmppOutReq": false,
+                "maxIdleTimer": 16000,
+                "maxPingAnswerTimer": 11000,
+//            "xmppRessourceName": "vnagw",
+                "maxPendingAsyncLockXmppQueue": 10000
+            },
             "s2s": {
                 "hostCallback": urlS2S,
                 //"hostCallback": "http://70a0ee9d.ngrok.io",
                 "locallistenningport": "4000"
-            },
+            }, "rest": {
+                "useRestAtStartup": true,
+                "useGotLibForHttp": true,
+                "gotOptions": {
+                    agentOptions: {
+                        /**
+                         * Keep sockets around in a pool to be used by other requests in the future. Default = false
+                         */
+                        keepAlive: true, // ?: boolean | undefined;
+                        /**
+                         * When using HTTP KeepAlive, how often to send TCP KeepAlive packets over sockets being kept alive. Default = 1000.
+                         * Only relevant if keepAlive is set to true.
+                         */
+                        keepAliveMsecs: 4302, // ?: number | undefined;
+                        /**
+                         * Maximum number of sockets to allow per host. Default for Node 0.10 is 5, default for Node 0.12 is Infinity
+                         */
+                        maxSockets: Infinity, // ?: number | undefined;
+                        /**
+                         * Maximum number of sockets allowed for all hosts in total. Each request will use a new socket until the maximum is reached. Default: Infinity.
+                         */
+                        maxTotalSockets: Infinity, // ?: number | undefined;
+                        /**
+                         * Maximum number of sockets to leave open in a free state. Only relevant if keepAlive is set to true. Default = 256.
+                         */
+                        maxFreeSockets: 1002, // ?: number | undefined;
+                        /**
+                         * Socket timeout in milliseconds. This will set the timeout after the socket is connected.
+                         */
+                        timeout: 120002, // ?: number | undefined;
+                    },
+                    gotRequestOptions: {
+                        timeout: { // This object describes the maximum allowed time for particular events.
+                            lookup: 5252, // lookup: 100, Starts when a socket is assigned.  Ends when the hostname has been resolved.
+                            connect: 10252, // connect: 50, Starts when lookup completes.  Ends when the socket is fully connected.
+                            secureConnect: 10252, // secureConnect: 50, Starts when connect completes. Ends when the handshake process completes.
+                            socket: 120002, // socket: 1000, Starts when the socket is connected. Resets when new data is transferred.
+                            send: 120002, // send: 10000, // Starts when the socket is connected. Ends when all data have been written to the socket.
+                            response: 120002 // response: 1000 // Starts when request has been flushed. Ends when the headers are received.
+                        }
+                    } // */
+                }
+            }, // */
             // Application identifier
             "application": {
                 "appID": "",
@@ -141,7 +303,7 @@ export module RainbowBodeSDKTest {
                 "enableConsoleLogs": true,
                 "enableFileLogs": false,
                 "color": true,
-                "level": "debug",
+                "level": "info",
                 "areas": logLevelAreas,
                 "customLabel": "RainbowSample",
                 "system-dev": {
@@ -158,16 +320,43 @@ export module RainbowBodeSDKTest {
                 }
             },
             "testOutdatedVersion": false,
+            "testDNSentry": true,
+            "httpoverxmppserver": true,
+            "intervalBetweenCleanMemoryCache": 1000 * 60 * 60 * 6, // Every 6 hours.
+            "requestsRate": {
+                "useRequestRateLimiter": true,
+                "maxReqByIntervalForRequestRate": 250, // nb requests during the interval.
+                "intervalForRequestRate": 60, // nb of seconds used for the calcul of the rate limit.
+                "timeoutRequestForRequestRate": 600 // nb seconds Request stay in queue before being rejected if queue is full.
+            },
+            "autoReconnectIgnoreErrors": false,
             // IM options
             "im": {
                 "sendReadReceipt": true,
-                "messageMaxLength": 1024,
-                "sendMessageToConnectedUser": true,
-                "conversationsRetrievedFormat": "small",
+//            "messageMaxLength": 1024,
+                "sendMessageToConnectedUser": false,
+                "conversationsRetrievedFormat": "full",
                 "storeMessages": false,
+                "copyMessage": true,
                 "nbMaxConversations": 15,
-                "rateLimitPerHour": 1000,
-                "messagesDataStore": DataStoreType.StoreTwinSide // */
+                "rateLimitPerHour": 100000,
+//        "messagesDataStore": DataStoreType.NoStore,
+                "messagesDataStore": DataStoreType.StoreTwinSide,
+                "autoInitialGetBubbles": true,
+                "autoInitialBubblePresence": true,
+                "maxBubbleJoinInProgress": 10,
+                "autoInitialBubbleFormat": "full",
+                "autoInitialBubbleUnsubscribed": true,
+                //"autoLoadConversations": true,
+                // "autoInitialBubblePresence": false,
+                "autoLoadConversations": true,
+                "autoLoadConversationHistory": false,
+                "autoLoadContacts": true,
+                "enableCarbon": true,
+                "enablesendurgentpushmessages": true,
+                //"useMessageEditionAndDeletionV2": false
+                "storeMessagesInConversation": true,
+                "maxMessagesStoredInConversation" : 830
             },
             // Services to start. This allows to start the SDK with restricted number of services, so there are less call to API.
             // Take care, severals services are linked, so disabling a service can disturb an other one.

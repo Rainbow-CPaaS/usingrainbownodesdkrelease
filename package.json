@@ -2,6 +2,7 @@
   "name": "usingrainbownodesdkrelease",
   "version": "1.0.0",
   "description": "test rainbow-node-sdk release version",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

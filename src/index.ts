@@ -22,7 +22,7 @@ import {main} from "ts-node/dist/bin";
 import * as util from "util";
 import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble.js";
 import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
-import {LEVELSNAMES} from "../../rainbow-node-sdk-sample2/lib/common/LevelLogs.js";
+import {LEVELSNAMES} from "rainbow-node-sdk/lib/common/LevelLogs.js";
 import inquirer from "inquirer";
 
 let rainbowSDK : NodeSDK; //RainbowSdk;

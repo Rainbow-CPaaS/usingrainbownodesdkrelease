@@ -27,6 +27,8 @@ import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble.js";
 import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
 import inquirer from "inquirer";
 import {writeFileSync} from "node:fs";
+import {default as os} from 'os';
+
 
 let rainbowSDK : NodeSDK; //RainbowSdk;
 let logger : Logger;
@@ -522,6 +524,8 @@ export module RainbowBodeSDKTest {
             }
         });
 
+        const tempDir = os.tmpdir();
+        options.logs.file.path=tempDir;
 
         // To add the name of the connected user in logs. Useful for debug when using multiple instance of the SDK in same program to connect several bots.
         // Of course it is not a good idea on production system to do it because it does not complain the RGPD.
@@ -539,7 +543,7 @@ export module RainbowBodeSDKTest {
         rainbowSDK.start(token).then(async (result: any) => {
             try {
                 // Do something when the SDK is started
-                logger.log("debug", "MAIN - rainbow SDK started result : ", logger.colors.green(result)); //logger.colors.green(JSON.stringify(result)));
+                logger.log("debug", "MAIN (usingrainbownodesdkrelease) - rainbow SDK started result : ", logger.colors.green(result)); //logger.colors.green(JSON.stringify(result)));
 
                 commandLineInteraction();
             } catch (err) {

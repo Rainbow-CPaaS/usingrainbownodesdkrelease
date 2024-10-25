@@ -17,12 +17,12 @@
     "mocha": "^10.6.0",
     "mocka": "0.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^4.9.3"
   },
   "dependencies": {
     "@types/btoa": "^1.2.5",
     "inquirer": "^10.0.1",
     "ngrok": "^5.0.0-beta.2",
-    "rainbow-node-sdk": "^2.30.0"
+    "rainbow-node-sdk": "^2.25.2-lts.11"
   }
 }

@@ -14,16 +14,19 @@ import "rainbow-node-sdk";
 // import {NodeSDK} from "";
 //import {NodeSDK} from "rainbow-node-sdk/lib/NodeSDK";
 
-import {NodeSDK, LogLevelAreas} from "rainbow-node-sdk";
+import {NodeSDK} from "rainbow-node-sdk";
+//import {LogLevelAreas} from "rainbow-node-sdk";
+//import {LEVELSNAMES} from "rainbow-node-sdk/lib/common/LevelLogs.js";
 
 import {DataStoreType} from "rainbow-node-sdk/lib/config/config.js";
 import {Logger} from "rainbow-node-sdk/lib/common/Logger.js";
 import {main} from "ts-node/dist/bin";
 import * as util from "util";
 import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble.js";
+//import {msToTime, setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
 import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
-import {LEVELSNAMES} from "rainbow-node-sdk/lib/common/LevelLogs.js";
 import inquirer from "inquirer";
+import {writeFileSync} from "node:fs";
 
 let rainbowSDK : NodeSDK; //RainbowSdk;
 let logger : Logger;
@@ -62,6 +65,117 @@ export module RainbowBodeSDKTest {
                 }, "subject", undefined, "middle"); // */
             //});
         });
+    }
+
+    function msToTime(duration: number): string {
+        let ms: number = duration % 1000;
+        duration = (duration - ms) / 1000;
+        let secs: number = duration % 60;
+        duration = (duration - secs) / 60;
+        let mins: number = duration % 60;
+        duration = (duration - mins) / 60;
+        let hrs: number = duration % 60;
+        let days: number = (duration - hrs) / 24;
+
+        let hours: string = (hrs < 10) ? "0" + hrs : hrs.toString();
+        let minutes: string = (mins < 10) ? "0" + mins : mins.toString();
+        let seconds: string = (secs < 10) ? "0" + secs : secs.toString();
+        let milliseconds: string = (ms < 10) ? "0" + ms : ms.toString();
+
+        //return hrs + ':' + mins + ':' + secs + '.' + ms;
+        return (days + " Jrs " + hours + ":" + minutes + ":" + seconds + "." + milliseconds);
+    }
+
+    async function testloadConversationHistoryAsyncBubbleTestBotName_2024() {
+        // To be used with user vincent00 on .Net
+        let bubbles = rainbowSDK.bubbles.getAllActiveBubbles();
+
+        for (const bubble of bubbles) {
+            //if (bubble.name.indexOf("testBubbleEvents")!= -1) {
+            //if (bubble.name.indexOf("bulleDeTest")!= -1) {
+            if (bubble.name.indexOf("testBotName_2024/02/09T10:35:36.732ZGuestUser")!= -1) {
+                logger.log("debug", "MAIN - testloadConversationHistoryAsyncBubbleTestBotName_2024 Found bubble.name : ", bubble.name, ", bubble.isActive : ", bubble.isActive);
+                testloadConversationHistoryAsyncBubbleByJid(bubble.jid).then((res) => {
+                    logger.log("debug", "MAIN - testloadConversationHistoryAsyncBubbleTestBotName_2024 testloadConversationHistoryAsyncBubbleByJid treated.");
+                });
+            } else {
+                logger.log("debug", "MAIN - testloadConversationHistoryAsyncBubbleTestBotName_2024 NOT Found bubble.name : ", bubble.name, ", buibble.isActive : ", bubble.isActive);
+            }
+        }
+    }
+
+    async function testloadConversationHistoryAsyncBubbleOpenrainbowNet() {
+        // To be used on PROD.
+        let bubbles = rainbowSDK.bubbles.getAllBubbles();
+        if (bubbles.length > 0) {
+            //let bubble = bubbles[0];
+            //let jid = "room_61aee9e9d7e94cacbce7234e3fca93f2@muc.openrainbow.com/a9b77288b939470b8da4611cc2af1ed1@openrainbow.com" // jid of the bubble "openrainbow.net" on .COM platform
+            let jid = "room_61aee9e9d7e94cacbce7234e3fca93f2@muc.openrainbow.com" // jid of the bubble "openrainbow.net" on .COM platform
+            await testloadConversationHistoryAsyncBubbleByJid(jid);
+        }
+    }
+
+    async function testloadConversationHistoryAsyncBubbleByJid(jid = "room_61aee9e9d7e94cacbce7234e3fca93f2@muc.openrainbow.com") {
+        // To be used on PROD.
+        let bubbles = rainbowSDK.bubbles.getAllBubbles();
+        if (bubbles.length > 0) {
+            //let bubble = bubbles[0];
+            //let jid = "room_61aee9e9d7e94cacbce7234e3fca93f2@muc.openrainbow.com/a9b77288b939470b8da4611cc2af1ed1@openrainbow.com" // jid of the bubble "openrainbow.net" on .COM platform
+            //let jid = "room_61aee9e9d7e94cacbce7234e3fca93f2@muc.openrainbow.com" // jid of the bubble "openrainbow.net" on .COM platform
+            let startDate: number | Date | undefined = undefined// new Date();
+            rainbowSDK.events.on("rainbow_onloadConversationHistoryCompleted", (conversationHistoryUpdated: { messages: { length: any; toSmallString: () => any; }; }) => {
+                // do something when the SDK has been started
+                logger.log("info", "MAIN - (rainbow_onloadConversationHistoryCompleted) - rainbow conversation history loaded completed, conversationHistoryUpdated?.messages?.length : ", conversationHistoryUpdated?.messages?.length);
+                let stopDate = new Date();
+                // @ts-ignore
+                let startDuration = Math.round(stopDate - startDate);
+                logger.log("info", "MAIN - testloadConversationHistoryAsyncBubbleByJid loadConversationHistoryAsync duration : " + startDuration + " ms => ", msToTime(startDuration));
+                let utc = new Date().toJSON().replace(/-/g, "_").replace(/:/g,"_");
+                let fileName = "listMsgs_"+utc ;
+                const path = 'c:/Temp/'+fileName+'.txt';
+                //writeFileSync(path, "", "utf8");
+
+                try {
+                    let data = conversationHistoryUpdated.messages.toSmallString();
+                    writeFileSync(path, data, "utf8");
+                    //appendFileSync(path, data);
+                } catch (err) {
+
+                }
+
+                /*
+                 for (let i = 0; i < conversationHistoryUpdated?.messages?.length ; i++) {
+                    let msg = conversationHistoryUpdated?.messages[i];
+                    logger.log("info", "MAIN - testloadConversationHistoryAsyncBubbleByJid conversationHistoryUpdated.messages[" + i + "] id : ", msg.id, ", fromJid : ", msg.fromJid, ", date : ", msg.date, ", content : ", msg.content);
+                }
+                // */
+
+                if (rainbowSDK) {
+                    rainbowSDK.stop().then(async () => {
+                        await setTimeoutPromised(10000);
+                        process.exit(0);
+                    }).catch((err: any) => {
+                        logger.log("warn", "MAIN - testloadConversationHistoryAsyncBubbleByJid RainbowSDK stop failed : ", err, ", but even stop the process."); //logger.colors.green(JSON.stringify(result)));
+                        process.exit(0);
+                    });
+                } else {
+                    process.exit(0);
+                }
+            });
+
+            rainbowSDK.conversations.getBubbleConversation(jid).then(async function (conversation :any) {
+                logger.log("info", "MAIN - testloadConversationHistoryAsyncBubbleByJid - getBubbleConversation, conversation.jid : ", conversation.jid);
+                /* that.getConversationHistoryMaxime(conversation).then(() => {
+                    logger.log("debug", "MAIN - testGetHistoryPageBubble - getConversationHistoryMaxime, conversation : ", conversation, ", status : ", conversation.status);
+                }); // */
+                startDate = new Date();
+                /* rainbowSDK.conversations.loadConversationHistoryAsync(conversation, 50).then((running :any) => {
+                    logger.log("info", "MAIN - testloadConversationHistoryAsyncBubbleByJid loadConversationHistoryAsync running : ", running);
+                });
+                // */
+
+            });
+        }
     }
 
     function commandLineInteraction() {
@@ -103,6 +217,7 @@ export module RainbowBodeSDKTest {
 
         // const ngrok = require('ngrok');
         let urlS2S;
+        /*
         let logLevelAreas = new LogLevelAreas(LEVELSNAMES.ERROR, true, false, false);
 
         logLevelAreas.admin.api = true;
@@ -189,17 +304,11 @@ export module RainbowBodeSDKTest {
         logLevelAreas.showEventsLogs();
         // logLevelAreas.showServicesLogs();
         logLevelAreas.hideServicesApiLogs();
-        /*
-            logLevelAreas.tasks.api = true;
-            logLevelAreas.tasks.level = LEVELSNAMES.INTERNAL;
-            logLevelAreas.tasksevent.level = LEVELSNAMES.INTERNAL;
-        */
 
         logLevelAreas.conversations.api = true;
         logLevelAreas.conversations.level = LEVELSNAMES.INTERNAL;
         logLevelAreas.conversationevent.level = LEVELSNAMES.INTERNAL;
         logLevelAreas.conversationhistory.level = LEVELSNAMES.INTERNAL;
-        // */
 
         //logLevelAreas.bubblemanager.level = LEVELSNAMES.INTERNAL;
 
@@ -211,6 +320,7 @@ export module RainbowBodeSDKTest {
         logLevelAreas.xmpp.level = LEVELSNAMES.INTERNAL;
         logLevelAreas.xmpp.xmppin
         logLevelAreas.xmpp.xmppout
+        // */
 
         let options = {
             "rainbow": {
@@ -301,17 +411,17 @@ export module RainbowBodeSDKTest {
             // Logs options
             "logs": {
                 "enableConsoleLogs": true,
-                "enableFileLogs": false,
+                "enableFileLogs": true,
                 "color": true,
                 "level": "info",
-                "areas": logLevelAreas,
+              //  "areas": logLevelAreas,
                 "customLabel": "RainbowSample",
                 "system-dev": {
                     "internals": true,
                     "http": true,
                 },
                 "file": {
-                    "path": "c:/temp/",
+                    "path": "/home/vincent/temp/",
                     "customFileName": "R-SDK-Node-TS-Sample",
                     //"level": 'info',                    // Default log level used
                     "zippedArchive": false /*,
@@ -419,7 +529,8 @@ export module RainbowBodeSDKTest {
 
         rainbowSDK = new NodeSDK(options);
         // To use the same logger than the SDK. It is not recommended for real programs.
-        logger = rainbowSDK._core._logger;
+        //logger = rainbowSDK._core._logger;
+        logger = rainbowSDK._core.logger;
 
         handleEvents();
 

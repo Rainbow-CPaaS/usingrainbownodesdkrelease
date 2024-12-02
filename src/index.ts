@@ -21,13 +21,13 @@ import {NodeSDK} from "rainbow-node-sdk";
 import {DataStoreType} from "rainbow-node-sdk/lib/config/config.js";
 import {Logger} from "rainbow-node-sdk/lib/common/Logger.js";
 import {main} from "ts-node/dist/bin";
-import * as util from "util";
+import * as util from "node:util";
 import {Bubble} from "rainbow-node-sdk/lib/common/models/Bubble.js";
 //import {msToTime, setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
 import {setTimeoutPromised} from "rainbow-node-sdk/lib/common/Utils.js";
 import inquirer from "inquirer";
 import {writeFileSync} from "node:fs";
-import {default as os} from 'os';
+import * as os from 'node:os';
 
 
 let rainbowSDK : NodeSDK; //RainbowSdk;
@@ -534,7 +534,7 @@ export module RainbowBodeSDKTest {
         rainbowSDK = new NodeSDK(options);
         // To use the same logger than the SDK. It is not recommended for real programs.
         //logger = rainbowSDK._core._logger;
-        logger = rainbowSDK._core.logger;
+        logger = rainbowSDK._core._logger;
 
         handleEvents();
 

@@ -1,0 +1,73 @@
+{
+  "compilerOptions": {
+    //  "ignoreDeprecations": "5.0",
+    "noImplicitAny": false,
+    "moduleResolution": "node16",
+    "module": "node16",
+    //"module": "ES2020",
+    //"module": "esnext",
+    //"moduleResolution": "node",
+    //"module": "NodeNext",
+    //"moduleResolution": "NodeNext",
+    "verbatimModuleSyntax": true,
+    "target": "es2022",
+    "sourceMap": true,
+    "declaration": true,
+    "allowJs": false,
+    "allowUnusedLabels": true,
+    //    "charset": "utf-8",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    //"noFallthroughCasesInSwitch": false,
+    //"noImplicitReturns": true,
+    "pretty": true,
+    //"removeComments": true,
+    "rootDir": "./src",
+    "project": "./src",
+    //"stripInternal": true,
+    "resolveJsonModule": true,
+    "outDir": "./build/esm",
+    "lib": [
+      "es2023"
+    ],
+    //, "dom"
+    //"moduleResolution": "node",
+    //"moduleResolution": "classic",
+    //"checkJs": true,
+    "explainFiles": true,
+    "diagnostics": true,
+   // "traceResolution": true,
+ //   "moduleResolution": "nodeNext",
+    "typeRoots": ["node_modules/@types"],  // "typeRoots": [] -> won't work
+    "types": ["node"]                      // "types": [] -> won't work
+  },
+  "buildOnSave": true,
+  "compileOnSave": true,
+  "formatCodeOptions": {
+    "indentSize": 4,
+    "tabSize": 4,
+    "newLineCharacter": "\r\n",
+    "convertTabsToSpaces": true,
+    "insertSpaceAfterCommaDelimiter": true,
+    "insertSpaceAfterSemicolonInForStatements": true,
+    "insertSpaceBeforeAndAfterBinaryOperators": true,
+    "insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": false,
+    "placeOpenBraceOnNewLineForControlBlocks": false
+  },
+  "exclude": [
+    "./node_modules/*",
+    "./bower_component",
+    "./dist",
+    "./build"
+  ],
+  "include": [
+    //"./src/**/*.ts",
+    "./src/index.ts",
+  ]
+}

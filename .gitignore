@@ -78,3 +78,4 @@ node_modules
 /tests/index.js
 /tests/index.js.map
 /.idea/*
+/build/

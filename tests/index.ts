@@ -1,6 +1,6 @@
 import "mocha";
 import  * as assert from "assert";
-import {RainbowBodeSDKTest} from "../dist";
+import {RainbowBodeSDKTest} from "../build/esm";
 
 describe("index", ()=> {
     it('should say MAIN - start', function () {

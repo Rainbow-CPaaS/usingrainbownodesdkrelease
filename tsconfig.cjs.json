@@ -1,0 +1,71 @@
+{
+  "compilerOptions": {
+    //  "ignoreDeprecations": "5.0",
+    "noImplicitAny": false,
+    //"module": "bundler",
+    //"module": "ES2020",
+    //"module": "esnext",
+    "module": "commonjs",
+    //"moduleResolution": "node",
+    //"module": "node16",
+    "moduleResolution": "node16",
+    "target": "esnext",
+    "sourceMap": true,
+    "declaration": true,
+    "allowJs": false,
+    "allowUnusedLabels": true,
+    //    "charset": "utf-8",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    //"noFallthroughCasesInSwitch": false,
+    //"noImplicitReturns": true,
+    "pretty": true,
+    //"removeComments": true,
+    "rootDir": "./src",
+    "project": "./src",
+    //"stripInternal": true,
+    "resolveJsonModule": true,
+    "outDir": "./build/cjs",
+    "lib": [
+      "es6",
+      "es2020"
+    ],
+    //, "dom"
+    //"moduleResolution": "node",
+    //"moduleResolution": "classic",
+    //"checkJs": true,
+    "explainFiles": true,
+    "diagnostics": true,
+    "traceResolution": true,
+ //   "moduleResolution": "nodeNext",
+    "types": []
+  },
+  "buildOnSave": true,
+  "compileOnSave": true,
+  "formatCodeOptions": {
+    "indentSize": 4,
+    "tabSize": 4,
+    "newLineCharacter": "\r\n",
+    "convertTabsToSpaces": true,
+    "insertSpaceAfterCommaDelimiter": true,
+    "insertSpaceAfterSemicolonInForStatements": true,
+    "insertSpaceBeforeAndAfterBinaryOperators": true,
+    "insertSpaceAfterKeywordsInControlFlowStatements": true,
+    "insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+    "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
+    "placeOpenBraceOnNewLineForFunctions": false,
+    "placeOpenBraceOnNewLineForControlBlocks": false
+  },
+  "exclude": [
+    "./node_modules/*",
+    "./bower_component",
+    "./dist",
+    "./build"
+  ],
+  "include": [
+    "./src/**/*.ts",
+  ]
+}

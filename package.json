@@ -3,25 +3,31 @@
   "version": "1.0.0",
   "description": "test rainbow-node-sdk release version",
   "type": "module",
-  "main": "index.js",
+  "main": "build/esm/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+    "compile": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+    "compilecjs": "tsc -b ./tsconfig.cjs.json",
+    "compileesm": "tsc -b ./tsconfig.esm.json",
+    "compiletypes": "tsc -b ./tsconfig.types.json",
+    "build:clean": "rm -rf ./build"
   },
   "keywords": [],
   "author": "V Berder",
   "license": "ISC",
   "devDependencies": {
-    "@types/mocha": "^10.0.7",
-    "@types/node": "^20.14.10",
-    "mocha": "^10.6.0",
+    "@types/linkify-it": "^3.0.5",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.1",
+    "mocha": "^10.8.2",
     "mocka": "0.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^4.9.3"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@types/btoa": "^1.2.5",
-    "inquirer": "^10.0.1",
+    "inquirer": "^12.1.0",
     "ngrok": "^5.0.0-beta.2",
     "os": "^0.1.2",
     "rainbow-node-sdk": "^2.25.2-lts.11"
